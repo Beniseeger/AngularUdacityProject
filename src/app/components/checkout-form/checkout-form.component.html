@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-center">
+  <form class="form-margin" #form="ngForm" (ngSubmit)="onSubmit()">
+    <h1>Full name</h1>
+    <input
+      name="name"
+      placeholder="Enter Fullname"
+      [(ngModel)]="fullName"
+      required
+      type="text"
+      minlength="3"
+      #formFields="ngModel"
+    />
+
+    <h1>Address</h1>
+    <input
+      name="address"
+      placeholder="Enter Address"
+      [(ngModel)]="address"
+      required
+      type="text"
+      minlength="3"
+      #addressField="ngModel"
+    />
+    <h1>Creditcard</h1>
+    <input
+      name="creditcard"
+      pattern="[0-9]*"
+      placeholder="(16-digits) Numbers only!"
+      [(ngModel)]="creditcard"
+      required
+      minlength="16"
+      maxlength="16"
+      type="text"
+      #creditCardField="ngModel"
+    />
+    <br />
+    <br />
+    <input
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid"
+      value="Submit"
+    />
+  </form>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div
+    class="errorMessages"
+    *ngIf="formFields.invalid && (formFields.dirty || formFields.touched)"
+  >
+    <div *ngIf="formFields.errors?.['required']">
+      Please enter a fullname!<br />
+    </div>
+    <div *ngIf="formFields.errors?.['minlength']">
+      Please enter a longer name.<br />
+    </div>
+  </div>
+  <div
+    class="errorMessages"
+    *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)"
+  >
+    <div *ngIf="addressField.errors?.['required']">
+      Please enter an address!<br />
+    </div>
+    <div *ngIf="addressField.errors?.['minlength']">
+      The address is not long enough!<br />
+    </div>
+  </div>
+  <div
+    class="errorMessages"
+    *ngIf="
+      creditCardField.invalid &&
+      (creditCardField.dirty || creditCardField.touched)
+    "
+  >
+    <span *ngIf="creditCardField.errors?.['required']">
+      Please enter a credit card!<br />
+    </span>
+
+    <span *ngIf="creditCardField.errors?.['minlength']">
+      The credit card information does not have the necessary length. Please use
+      16 digits.<br />
+    </span>
+    <span *ngIf="creditCardField.errors?.['pattern']">
+      Please use digits only!<br />
+    </span>
+  </div>
+</div>

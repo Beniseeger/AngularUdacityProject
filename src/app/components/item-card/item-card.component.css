@@ -1,0 +1,21 @@
+#cardItem {
+  border: 1px solid black;
+}
+
+.row {
+  justify-content: space-around;
+}
+
+.card-img-top {
+  margin-top: 10px;
+}
+
+.row > div {
+  flex-basis: 20%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  /*demo*/
+
+  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}

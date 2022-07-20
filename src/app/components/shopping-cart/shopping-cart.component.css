@@ -1,0 +1,35 @@
+#cartItem {
+  margin: auto;
+  margin-top: 20px;
+  width: 50%;
+  padding: 10px;
+}
+
+#cartDescription {
+  margin: auto;
+  margin-top: 20px;
+  height: 50%;
+  padding: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  padding-top: 40%;
+}
+
+.row-bordered {
+  border-bottom: 1px solid #ccc;
+  margin: 0 15px;
+}
+
+.centerButtons {
+  margin: auto;
+  margin-top: 20px;
+  width: 50%;
+  padding: 10px;
+}

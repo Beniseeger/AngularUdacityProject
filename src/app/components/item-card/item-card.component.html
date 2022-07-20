@@ -1,0 +1,39 @@
+<div class="row">
+  <div
+    class="card col"
+    id="cardItem"
+    style="width: 18rem"
+    *ngFor="let item of itemCardList"
+  >
+    <a [routerLink]="['/details', item.id]">
+      <img class="card-img-top" src="{{ item.url }}" alt="Card image cap" />
+    </a>
+    <div class="card-body">
+      <p class="card-text d-flex justify-content-center">
+        {{ item.name }}
+      </p>
+      <p class="card-text d-flex justify-content-center">
+        {{ item.price }}
+      </p>
+
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="quantity"
+      >
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <br />
+      <button
+        mat-button
+        class="btn btn-primary d-flex justify-content-center"
+        (click)="addItemToOrder(item)"
+      >
+        Order Prdoduct
+      </button>
+    </div>
+  </div>
+</div>

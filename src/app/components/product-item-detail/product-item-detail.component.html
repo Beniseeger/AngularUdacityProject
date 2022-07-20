@@ -1,0 +1,38 @@
+<div class="card" id="product-item-card">
+  <div class="card-body p-0">
+    <div class="row">
+      <div class="col">
+        <img src="{{ currentProduct.url }}" class="card-img img-fluid" alt="" />
+      </div>
+      <div class="col" id="product-item-text">
+        <h1>
+          {{ currentProduct.name }}
+        </h1>
+        <h5>{{ currentProduct.price }} €</h5>
+        <p>
+          {{ currentProduct.description }}
+        </p>
+
+        <select
+          class="form-select"
+          aria-label="Select quantity"
+          style="width: 50%"
+          [(ngModel)]="quantity"
+        >
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+
+        <a
+          class="btn btn-primary d-flex justify-content-center"
+          style="margin-top: 20px; margin-bottom: 20px"
+          (click)="orderProduct()"
+          >Order Prdoduct</a
+        >
+        <a routerLink="/">&#8592; Back to product list</a>
+      </div>
+    </div>
+  </div>
+</div>
