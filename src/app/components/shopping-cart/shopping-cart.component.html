@@ -95,12 +95,13 @@
       </a>
     </div>
     <div class="col">
-      <a
+      <input
         class="btn btn-primary"
         style="width: 200px; margin-left: 50%"
         routerLink="/checkout"
-        >Checkout
-      </a>
+        [disabled]="shoppingCartItems.length == 0"
+        value="Checkout"
+      />
     </div>
   </div>
 </div>

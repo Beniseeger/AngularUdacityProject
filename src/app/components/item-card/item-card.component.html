@@ -1,10 +1,5 @@
 <div class="row">
-  <div
-    class="card col"
-    id="cardItem"
-    style="width: 18rem"
-    *ngFor="let item of itemCardList"
-  >
+  <div class="card col-1" id="cardItem" *ngFor="let item of itemCardList">
     <a [routerLink]="['/details', item.id]">
       <img class="card-img-top" src="{{ item.url }}" alt="Card image cap" />
     </a>
@@ -18,7 +13,7 @@
 
       <select
         class="form-select"
-        aria-label="Default select example"
+        aria-label="Select Quantity"
         [(ngModel)]="quantity"
       >
         <option value="1" selected>1</option>
