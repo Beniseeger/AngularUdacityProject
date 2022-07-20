@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCardItem } from 'src/app/models/ShoppingCartItem';
+import { Product } from 'src/app/models/Product';
 import { HttpRequestService } from 'src/app/services/http-request.service';
-import { Product } from '../../models/Product';
 import { MatDialog } from '@angular/material/dialog';
 import { AddedItemToShoppingCartComponent } from '../added-item-to-shopping-cart/added-item-to-shopping-cart.component';
 
@@ -12,7 +11,6 @@ import { AddedItemToShoppingCartComponent } from '../added-item-to-shopping-cart
 })
 export class ItemCardComponent implements OnInit {
   itemCardList: Product[] = [];
-  quantity = 1;
   constructor(
     private httpRequestService: HttpRequestService,
     private dialog: MatDialog
@@ -21,6 +19,7 @@ export class ItemCardComponent implements OnInit {
   ngOnInit(): void {
     this.httpRequestService.getAllProducts().subscribe((data) => {
       for (let index = 0; index < data.length; index++) {
+        data[index].quantity = 1;
         this.itemCardList.push(data[index]);
       }
     });
@@ -33,8 +32,8 @@ export class ItemCardComponent implements OnInit {
       price: item.price,
       url: item.url,
       description: item.description,
-      quantity: parseInt(this.quantity as unknown as string),
-    } as ShoppingCardItem;
+      quantity: parseInt(item.quantity as unknown as string),
+    } as Product;
 
     this.httpRequestService.addProductToShoppingCart(newShoppingCartItem);
 

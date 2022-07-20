@@ -11,11 +11,7 @@
         {{ item.price }}
       </p>
 
-      <select
-        class="form-select"
-        aria-label="Select Quantity"
-        [(ngModel)]="quantity"
-      >
+      <select class="form-select" [(ngModel)]="item.quantity">
         <option value="1" selected>1</option>
         <option value="2">2</option>
         <option value="3">3</option>

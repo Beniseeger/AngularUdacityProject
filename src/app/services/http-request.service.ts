@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/Product';
-import { ShoppingCardItem } from '../models/ShoppingCartItem';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,7 @@ export class HttpRequestService {
   private _baseUrl = './assets/data.json';
 
   private _shoppingCardStorage = window.localStorage;
-  private _shoppingCardItems: ShoppingCardItem[] = [];
+  private _shoppingCardItems: Product[] = [];
 
   constructor(private http: HttpClient) {
     this._shoppingCardItems = JSON.parse(
@@ -25,7 +24,7 @@ export class HttpRequestService {
     return result;
   }
 
-  addProductToShoppingCart(newShoppingCartItem: ShoppingCardItem): void {
+  addProductToShoppingCart(newShoppingCartItem: Product): void {
     let itemAlreadyExists = false;
     for (let index = 0; index < this._shoppingCardItems.length; index++) {
       if (this._shoppingCardItems[index].id == newShoppingCartItem.id) {
@@ -46,7 +45,7 @@ export class HttpRequestService {
     );
   }
 
-  getShoppingCartItems(): ShoppingCardItem[] | [] {
+  getShoppingCartItems(): Product[] | [] {
     return this._shoppingCardItems;
   }
 
@@ -55,7 +54,7 @@ export class HttpRequestService {
     this._shoppingCardStorage.clear();
   }
 
-  removeItemFromShoppingCart(item: ShoppingCardItem): void {
+  removeItemFromShoppingCart(item: Product): void {
     const index = this._shoppingCardItems.indexOf(item, 0);
     this._shoppingCardItems.splice(index, 1);
 

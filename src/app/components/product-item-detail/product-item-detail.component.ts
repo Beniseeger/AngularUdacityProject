@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { ShoppingCardItem } from 'src/app/models/ShoppingCartItem';
+import { Product } from 'src/app/models/Product';
 import { HttpRequestService } from 'src/app/services/http-request.service';
-import { Product } from '../../models/Product';
 import { AddedItemToShoppingCartComponent } from '../added-item-to-shopping-cart/added-item-to-shopping-cart.component';
 
 @Component({
@@ -20,6 +19,7 @@ export class ProductItemDetailComponent implements OnInit {
     price: -1,
     url: '',
     description: '',
+    quantity: 1,
   };
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +48,7 @@ export class ProductItemDetailComponent implements OnInit {
       url: this.currentProduct.url,
       description: this.currentProduct.description,
       quantity: parseInt(this.quantity as unknown as string),
-    } as ShoppingCardItem;
+    } as Product;
 
     this.httpRequestService.addProductToShoppingCart(newShoppingCartItem);
 

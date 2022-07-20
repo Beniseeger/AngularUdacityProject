@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCardItem } from 'src/app/models/ShoppingCartItem';
+import { Product } from 'src/app/models/Product';
 import { HttpRequestService } from 'src/app/services/http-request.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { HttpRequestService } from 'src/app/services/http-request.service';
   styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  shoppingCartItems: ShoppingCardItem[] = [];
+  shoppingCartItems: Product[] = [];
   totalCosts: number = 0;
   constructor(private httpRequestService: HttpRequestService) {}
 
@@ -23,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
     this.calculateTotalCosts();
   }
 
-  removeItemFromShoppingCart(item: ShoppingCardItem): void {
+  removeItemFromShoppingCart(item: Product): void {
     this.httpRequestService.removeItemFromShoppingCart(item);
     this.calculateTotalCosts();
   }
@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit {
     this.totalCosts = costs;
   }
 
-  changedQuantity(item: ShoppingCardItem, value: number): void {
+  changedQuantity(item: Product, value: number): void {
     this.httpRequestService.setQuantityForCartItem(
       item.id,
       parseInt(value as unknown as string)
@@ -45,7 +45,7 @@ export class ShoppingCartComponent implements OnInit {
     this.calculateTotalCosts();
   }
 
-  getQuantity(item: ShoppingCardItem): Array<number> {
+  getQuantity(item: Product): Array<number> {
     let resultArray: Array<number> = [];
     for (
       let index = 1;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { UserInformationService } from 'src/app/services/user-information.service';
 import { UserInformation } from 'src/app/models/UserInformation';
+import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
+import { HttpRequestService } from 'src/app/services/http-request.service';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -16,11 +17,12 @@ export class OrderConfirmationComponent implements OnInit {
   };
 
   constructor(
-    private route: ActivatedRoute,
-    private userInformationService: UserInformationService
+    private userInformationService: UserInformationService,
+    private httpRequestService: HttpRequestService
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.userInformationService.getUser();
+    this.httpRequestService.clearShoppingCart();
   }
 }
