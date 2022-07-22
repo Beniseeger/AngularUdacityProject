@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/models/Product';
 import { HttpRequestService } from 'src/app/services/http-request.service';
+import { ModifiedShoppingCartComponent } from '../modified-shopping-cart/modified-shopping-cart.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,7 +12,10 @@ import { HttpRequestService } from 'src/app/services/http-request.service';
 export class ShoppingCartComponent implements OnInit {
   shoppingCartItems: Product[] = [];
   totalCosts: number = 0;
-  constructor(private httpRequestService: HttpRequestService) {}
+  constructor(
+    private httpRequestService: HttpRequestService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.shoppingCartItems = this.httpRequestService.getShoppingCartItems();
@@ -24,6 +29,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeItemFromShoppingCart(item: Product): void {
+    let modifiedDialog = this.dialog.open(ModifiedShoppingCartComponent, {
+      height: '200',
+      width: '200',
+    });
+    modifiedDialog.componentInstance.item = item;
+    modifiedDialog.componentInstance.dialogText =
+      'We have removed the item: ' + item.name + ' from your shopping cart';
+
     this.httpRequestService.removeItemFromShoppingCart(item);
     this.calculateTotalCosts();
   }
@@ -37,22 +50,22 @@ export class ShoppingCartComponent implements OnInit {
     this.totalCosts = costs;
   }
 
-  changedQuantity(item: Product, value: number): void {
-    this.httpRequestService.setQuantityForCartItem(
-      item.id,
-      parseInt(value as unknown as string)
-    );
-    this.calculateTotalCosts();
-  }
+  changedQuantity(item: Product): void {
+    let modifiedDialog = this.dialog.open(ModifiedShoppingCartComponent, {
+      height: '200',
+      width: '200',
+    });
 
-  getQuantity(item: Product): Array<number> {
-    let resultArray: Array<number> = [];
-    for (
-      let index = 1;
-      index <= parseInt(item.quantity as unknown as string) + 4;
-      index++
-    )
-      resultArray.push(index);
-    return resultArray;
+    modifiedDialog.componentInstance.dialogText =
+      'You have modified: ' +
+      item.name +
+      '. You are now ordering ' +
+      item.quantity +
+      ' ' +
+      item.name +
+      "'s";
+
+    this.httpRequestService.updateShoppingCartItemValues(item);
+    this.calculateTotalCosts();
   }
 }

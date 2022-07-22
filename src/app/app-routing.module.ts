@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckoutFormComponent } from './components/checkout-form/checkout-form.component';
+import { CheckoutFormComponent } from './components/shopping-cart/checkout-form/checkout-form.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { ProductItemDetailComponent } from './components/product-item-detail/product-item-detail.component';
@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'order-confirmation',
     component: OrderConfirmationComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '/',
   },
 ];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { HttpRequestService } from 'src/app/services/http-request.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,9 @@ import { AddedItemToShoppingCartComponent } from '../added-item-to-shopping-cart
 })
 export class ItemCardComponent implements OnInit {
   itemCardList: Product[] = [];
+
+  @Output() shoppingCartItemCount: EventEmitter<number> = new EventEmitter();
+
   constructor(
     private httpRequestService: HttpRequestService,
     private dialog: MatDialog
@@ -26,6 +29,8 @@ export class ItemCardComponent implements OnInit {
   }
 
   addItemToOrder(item: Product): void {
+    this.shoppingCartItemCount.emit(this.itemCardList.length);
+    console.log('Emitted ebemnt ');
     const newShoppingCartItem = {
       id: item.id,
       name: item.name,

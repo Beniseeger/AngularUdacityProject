@@ -1,5 +1,12 @@
 # MyStore Project Overview
 
+# Changes for resubmission
+
+1. I have added a redirect route to the app-routing.module if a non existing route is called
+2. I have created feedback to the user if he removes something from the cart
+3. I have rearranged the components for the checkout form and shoppingcartitem, so they are related / child components of the shopping cart
+4. As the shoppingcartitems are child components of the shopping cart, I have included Variable Injections with Output and Input to these components
+
 # Application startup
 
 This project uses angular to build a single page application of an online shop.

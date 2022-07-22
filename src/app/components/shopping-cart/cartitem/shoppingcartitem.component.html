@@ -1,0 +1,71 @@
+<div class="card" style="max-width: auto; max-height: 300px">
+  <div class="card-body p-0">
+    <div class="row g-0">
+      <div class="col-3 text-right">
+        <img
+          src="{{ cartItem.url }}"
+          class="card-img-top"
+          alt="cartItem"
+          style="max-height: 200px; max-width: 200px"
+        />
+      </div>
+
+      <div class="col-8" id="cartDescription">
+        <div class="container">
+          <div class="row">
+            <div class="col-3 center"><h4>Item</h4></div>
+            <div class="col-3 center">
+              <h4>Quantity</h4>
+            </div>
+            <div class="col-3 center">
+              <h4>Price</h4>
+            </div>
+            <div class="col-3 center">
+              <h4>Delete</h4>
+            </div>
+            <div class="w-100 row-bordered"></div>
+            <div class="col-3" style="margin-top: 20px">
+              <div class="column">
+                <div class="col">
+                  <h2>
+                    {{ cartItem.name }}
+                  </h2>
+                </div>
+                <div class="col">
+                  <h4 class="text-truncate">
+                    {{ cartItem.description }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 center">
+              <select
+                class="form-select"
+                aria-label="Select quantity"
+                style="width: 50%"
+                (ngModelChange)="changeQuantity(cartItem, $event)"
+                [(ngModel)]="cartItem.quantity"
+              >
+                <option
+                  *ngFor="let index of getQuantity(cartItem)"
+                  value="{{ index }}"
+                >
+                  {{ index }}
+                </option>
+              </select>
+            </div>
+            <div class="col-3">
+              <h5 class="center description">{{ cartItem.price }} €</h5>
+            </div>
+
+            <div class="col-3">
+              <a (click)="removeItemFromShoppingCart.emit(cartItem)">
+                <i class="bi bi-trash center description"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

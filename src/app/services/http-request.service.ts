@@ -64,9 +64,9 @@ export class HttpRequestService {
     );
   }
 
-  setQuantityForCartItem(itemId: number, quantity: number): void {
-    this._shoppingCardItems.map((items) => {
-      if (items.id == itemId) items.quantity = quantity;
+  updateShoppingCartItemValues(updatedItem: Product): void {
+    this._shoppingCardItems.map((item) => {
+      if (item.id == updatedItem.id) item = updatedItem;
     });
     this._shoppingCardStorage.setItem(
       'shopping_card',
